@@ -67,7 +67,12 @@
     ],
     "outDir": "build",
     "sourcemap": true,
-    "dts": true,
+    "dts": {
+      "compilerOptions": {
+        "skipLibCheck": true,
+        "types": []
+      }
+    },
     "external": [
       "react",
       "react-native",

@@ -1,5 +1,6 @@
 import { HomeMessage, HomeMessageIcon } from '@acme/feature-home';
 import { Image, StyleSheet, Platform } from 'react-native';
+import { Button } from 'tamagui';
 
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
@@ -25,6 +26,9 @@ export default function HomeScreen() {
         </ThemedText>
       </ThemedView>
       <ThemedView style={styles.stepContainer}>
+        <Button backgroundColor="$color3">
+          <Button.Text>Step 1: Try it</Button.Text>
+        </Button>
         <ThemedText type="subtitle">Step 1: Try it</ThemedText>
         <ThemedText>
           Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
