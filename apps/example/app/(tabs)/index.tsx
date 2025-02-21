@@ -26,7 +26,7 @@ export default function HomeScreen() {
         </ThemedText>
       </ThemedView>
       <ThemedView style={styles.stepContainer}>
-        <Button backgroundColor="$color3">
+        <Button>
           <Button.Text>Step 1: Try it</Button.Text>
         </Button>
         <ThemedText type="subtitle">Step 1: Try it</ThemedText>
