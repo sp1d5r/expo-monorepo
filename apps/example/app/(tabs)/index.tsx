@@ -1,10 +1,9 @@
 import { HomeMessage, HomeMessageIcon } from '@acme/feature-home';
 import { Image, StyleSheet, Platform } from 'react-native';
-import { Button } from 'tamagui';
+import { Button, YStack, XStack } from 'tamagui';
 
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
 
 export default function HomeScreen() {
   return (
@@ -17,52 +16,48 @@ export default function HomeScreen() {
         />
       }
     >
-      <ThemedView style={styles.titleContainer}>
+      <XStack gap="$2">
         <ThemedText>
           <HomeMessage />
         </ThemedText>
         <ThemedText>
           <HomeMessageIcon />
         </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <Button>
-          <Button.Text>Step 1: Try it</Button.Text>
-        </Button>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12',
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          Tap the Explore tab to learn more about what's included in this starter app.
-        </ThemedText>
-      </ThemedView>
+      </XStack>
+
+      <YStack gap="$4" mt="$4">
+        <YStack gap="$2">
+          <Button>
+            <Button.Text>Step 1: Try it</Button.Text>
+          </Button>
+          <ThemedText>
+            Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see
+            changes. Press{' '}
+            <ThemedText type="defaultSemiBold">
+              {Platform.select({
+                ios: 'cmd + d',
+                android: 'cmd + m',
+                web: 'F12',
+              })}
+            </ThemedText>{' '}
+            to open developer tools.
+          </ThemedText>
+        </YStack>
+
+        <YStack gap="$2">
+          <Button>
+            <Button.Text>Step 2: Explore</Button.Text>
+          </Button>
+          <ThemedText>
+            Tap the Explore tab to learn more about what's included in this starter app.
+          </ThemedText>
+        </YStack>
+      </YStack>
     </ParallaxScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-  },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
-  },
   reactLogo: {
     height: 178,
     width: 290,
