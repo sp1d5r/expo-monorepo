@@ -27,7 +27,7 @@ export default function RootLayout() {
     return null;
   }
 
-  if (new Date().getHours() < 12) {
+  if (new Date().getHours() > 12) {
     return <Redirect href="/(auth)/login" />;
   }
 
