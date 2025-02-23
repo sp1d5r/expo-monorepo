@@ -1,9 +1,15 @@
+import { useRouter } from 'expo-router';
 import { Image, ImageBackground, StyleSheet, useWindowDimensions } from 'react-native';
-import { Button, Card, H1, Text, XStack, YStack } from 'tamagui';
+import { Button, Card, Text, XStack, YStack } from 'tamagui';
 
 export function OnboardingScreen() {
   const { width } = useWindowDimensions();
   const isDesktop = width >= 768; // Breakpoint for desktop
+  const router = useRouter();
+
+  const handleTourPress = () => {
+    router.push('/(auth)/tour');
+  };
 
   if (isDesktop) {
     return (
@@ -48,7 +54,7 @@ export function OnboardingScreen() {
               Sign in with Apple
             </Button>
 
-            <Button size="$5" variant="outlined" onPress={() => {}}>
+            <Button size="$5" variant="outlined" onPress={handleTourPress}>
               Take a quick tour
             </Button>
           </YStack>
@@ -64,26 +70,26 @@ export function OnboardingScreen() {
       style={styles.backgroundImage}
       resizeMode="cover"
     >
-      {/* Content Container */}
-      <YStack flex={1} padding="$4">
+      <YStack flex={1} padding="$4" justifyContent="space-between">
         {/* Centered Logo and Text */}
         <YStack flex={1} justifyContent="center" alignItems="center" space="$2">
-          <Image source={require('../../assets/images/react-logo.png')} style={styles.logo} />
-          <Text color="white" textAlign="center" fontSize={16}>
+          <Image source={require('../../assets/images/react-logo.png')} style={styles.mobileLogo} />
+          <Text color="white" fontSize={20} fontWeight="400">
             A place for your people
           </Text>
         </YStack>
 
         {/* Action Buttons */}
-        <YStack space="$2" marginBottom="$4">
+        <YStack space="$3">
           <Button
             size="$5"
-            backgroundColor="rgba(0, 0, 0, 0.8)"
-            color="white"
+            backgroundColor="black"
+            opacity={0.9}
+            borderRadius="$10"
             icon={
               <Image
                 source={require('../../assets/images/react-logo.png')}
-                style={styles.buttonIcon}
+                style={[styles.buttonIcon, { marginRight: 8 }]}
               />
             }
             onPress={() => {}}
@@ -93,11 +99,12 @@ export function OnboardingScreen() {
 
           <Button
             size="$5"
-            theme="dark"
-            backgroundColor="rgba(255, 255, 255, 0.1)"
-            borderColor="rgba(255, 255, 255, 0.2)"
+            backgroundColor="transparent"
+            borderWidth={1}
+            borderColor="rgba(255, 255, 255, 0.3)"
+            borderRadius="$10"
             color="white"
-            onPress={() => {}}
+            onPress={handleTourPress}
           >
             Take a quick tour
           </Button>
@@ -123,10 +130,14 @@ const styles = StyleSheet.create({
     height: 50,
     tintColor: 'white',
   },
+  mobileLogo: {
+    width: 40,
+    height: 40,
+    tintColor: 'white',
+  },
   buttonIcon: {
     width: 20,
     height: 20,
-    marginRight: 8,
     tintColor: 'white',
   },
 });

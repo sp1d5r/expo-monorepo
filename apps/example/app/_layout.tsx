@@ -1,13 +1,12 @@
 import { tamaguiConfig } from '@acme/ui';
 import { useFonts } from 'expo-font';
-import { Stack, useRouter } from 'expo-router';
+import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
 import { TamaguiProvider, Theme } from 'tamagui';
 
-import { OnboardingScreen } from '@/components/auth/OnboardingScreen';
 import { useColorScheme } from '@/hooks/useColorScheme';
 
 SplashScreen.preventAutoHideAsync();
@@ -28,15 +27,13 @@ export default function RootLayout() {
     return null;
   }
 
-  // if (new Date().getHours() < 12) {
-  //   return <Redirect href="/(auth)/login" />;
-  // }
-
   return (
     <TamaguiProvider config={tamaguiConfig} defaultTheme={colorScheme!}>
       <Theme name={'green'}>
-        {/* Show OnboardingScreen instead of main app for now */}
-        <OnboardingScreen />
+        <Stack>
+          <Stack.Screen name="index" options={{ headerShown: false }} />
+          <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+        </Stack>
         <StatusBar style="auto" />
       </Theme>
     </TamaguiProvider>
