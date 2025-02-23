@@ -7,33 +7,9 @@ export default function AuthLayout() {
   const colorScheme = useColorScheme();
 
   return (
-    <Stack
-      screenOptions={{
-        headerStyle: {
-          backgroundColor: Colors[colorScheme ?? 'light'].background,
-        },
-        headerTintColor: Colors[colorScheme ?? 'light'].text,
-        headerBackTitle: 'Back',
-      }}
-    >
-      <Stack.Screen
-        name="login"
-        options={{
-          title: 'Sign In',
-        }}
-      />
-      <Stack.Screen
-        name="register"
-        options={{
-          title: 'Create Account',
-        }}
-      />
-      <Stack.Screen
-        name="forgot-password"
-        options={{
-          title: 'Reset Password',
-        }}
-      />
+    <Stack screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="tour" />
+      <Stack.Screen name="login" />
     </Stack>
   );
 }
