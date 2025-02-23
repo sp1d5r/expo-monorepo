@@ -1,12 +1,13 @@
 import { tamaguiConfig } from '@acme/ui';
 import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
+import { Stack, useRouter } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
 import { TamaguiProvider, Theme } from 'tamagui';
 
+import { OnboardingScreen } from '@/components/auth/OnboardingScreen';
 import { useColorScheme } from '@/hooks/useColorScheme';
 
 SplashScreen.preventAutoHideAsync();
@@ -34,11 +35,8 @@ export default function RootLayout() {
   return (
     <TamaguiProvider config={tamaguiConfig} defaultTheme={colorScheme!}>
       <Theme name={'green'}>
-        {/* Slot for page content */}
-        <Stack>
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen name="+not-found" />
-        </Stack>
+        {/* Show OnboardingScreen instead of main app for now */}
+        <OnboardingScreen />
         <StatusBar style="auto" />
       </Theme>
     </TamaguiProvider>
