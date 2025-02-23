@@ -11,6 +11,10 @@ export function OnboardingScreen() {
     router.push('/(auth)/tour');
   };
 
+  const handleSignIn = () => {
+    router.push('/(auth)/login');
+  };
+
   if (isDesktop) {
     return (
       <XStack flex={1} padding="$4" backgroundColor="$background">
@@ -49,7 +53,7 @@ export function OnboardingScreen() {
                   style={styles.buttonIcon}
                 />
               }
-              onPress={() => {}}
+              onPress={handleSignIn}
             >
               Sign in with Apple
             </Button>
@@ -63,24 +67,23 @@ export function OnboardingScreen() {
     );
   }
 
-  // Mobile layout (unchanged)
   return (
     <ImageBackground
       source={require('../../assets/images/onboarding-hero.jpg')}
       style={styles.backgroundImage}
       resizeMode="cover"
     >
-      <YStack flex={1} padding="$4" justifyContent="space-between">
-        {/* Centered Logo and Text */}
-        <YStack flex={1} justifyContent="center" alignItems="center" space="$2">
+      <YStack flex={1} padding="$4" backgroundColor="rgba(0, 0, 0, 0.4)">
+        {/* Main Content Container */}
+        <YStack flex={1} justifyContent="center" alignItems="center" minHeight="100%">
           <Image source={require('../../assets/images/react-logo.png')} style={styles.mobileLogo} />
-          <Text color="white" fontSize={20} fontWeight="400">
+          <Text color="white" fontSize={20} fontWeight="400" marginTop="$2">
             A place for your people
           </Text>
         </YStack>
 
-        {/* Action Buttons */}
-        <YStack space="$3">
+        {/* Buttons Container */}
+        <YStack position="absolute" bottom={0} left={0} right={0} padding="$4" space="$3">
           <Button
             size="$5"
             backgroundColor="black"
@@ -92,7 +95,7 @@ export function OnboardingScreen() {
                 style={[styles.buttonIcon, { marginRight: 8 }]}
               />
             }
-            onPress={() => {}}
+            onPress={handleSignIn}
           >
             Sign in with Apple
           </Button>
@@ -118,6 +121,7 @@ const styles = StyleSheet.create({
   backgroundImage: {
     flex: 1,
     width: '100%',
+    height: '100%', // Added to ensure full height
     backgroundColor: '#000',
   },
   desktopImage: {
