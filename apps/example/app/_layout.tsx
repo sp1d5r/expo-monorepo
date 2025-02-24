@@ -7,8 +7,13 @@ import { useEffect } from 'react';
 import 'react-native-reanimated';
 import { TamaguiProvider, Theme } from 'tamagui';
 
+import { initializeFirebase, firebaseConfig } from '@/constants/FirebaseConfig';
+import { AuthProvider } from '@/contexts/AuthContext';
 import { useColorScheme } from '@/hooks/useColorScheme';
 
+// Initialize Firebase
+console.log(firebaseConfig);
+initializeFirebase(firebaseConfig);
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
@@ -29,13 +34,15 @@ export default function RootLayout() {
 
   return (
     <TamaguiProvider config={tamaguiConfig} defaultTheme={colorScheme!}>
-      <Theme name={'green'}>
-        <Stack>
-          <Stack.Screen name="index" options={{ headerShown: false }} />
-          <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-        </Stack>
-        <StatusBar style="auto" />
-      </Theme>
+      <AuthProvider>
+        <Theme name={'green'}>
+          <Stack>
+            <Stack.Screen name="index" options={{ headerShown: false }} />
+            <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+          </Stack>
+          <StatusBar style="auto" />
+        </Theme>
+      </AuthProvider>
     </TamaguiProvider>
   );
 }
