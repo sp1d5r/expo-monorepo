@@ -18,16 +18,15 @@ export const ButtonContext = createStyledContext({
 export const ButtonFrame = styled(View, {
   name: 'Button',
   context: ButtonContext,
-  backgroundColor: '$background',
-  alignItems: 'center',
+  background: '$background',
   flexDirection: 'row',
 
   hoverStyle: {
-    backgroundColor: '$backgroundHover',
+    background: '$backgroundHover',
   },
 
   pressStyle: {
-    backgroundColor: '$backgroundPress',
+    background: '$backgroundPress',
   },
 
   variants: {
@@ -36,7 +35,7 @@ export const ButtonFrame = styled(View, {
         return {
           height: tokens.size[name as keyof typeof tokens.size],
           borderRadius: tokens.radius[name as keyof typeof tokens.radius],
-          gap: tokens.space[name as keyof typeof tokens.space] * 0.2,
+          gap: Number(tokens.space[name as keyof typeof tokens.space]) * 0.2,
           paddingHorizontal: getSpace(name, {
             shift: -1,
           }),
@@ -46,7 +45,7 @@ export const ButtonFrame = styled(View, {
   } as const,
 
   defaultVariants: {
-    size: '$md',
+    size: '$md' as SizeTokens,
   },
 });
 
@@ -56,7 +55,6 @@ export const ButtonText = styled(Text, {
   name: 'ButtonText',
   context: ButtonContext,
   color: '$color',
-  userSelect: 'none',
 
   variants: {
     size: {
