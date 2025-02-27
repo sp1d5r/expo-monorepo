@@ -10,9 +10,10 @@
     "build": "expo export --output-dir ./build --platform all",
     "start": "expo start",
     "android": "expo run:android",
-    "ios": "expo run:ios",
+    "ios": "expo start --clear --ios",
     "web": "expo start --web",
-    "eas-build-post-install": "pnpm run -w build:example"
+    "eas-build-post-install": "pnpm run -w build:example",
+    "clean": "expo start -c"
   },
   "dependencies": {
     "@acme/ui": "workspace:*",
