@@ -1,7 +1,8 @@
+import { Text, Button } from '@acme/ui';
 import { useRouter } from 'expo-router';
 import { Image, StyleSheet, useWindowDimensions } from 'react-native';
 import Carousel from 'react-native-reanimated-carousel';
-import { Button, Card, H1, Text, XStack, YStack } from 'tamagui';
+import { Card, H1, XStack, YStack } from 'tamagui';
 
 interface TourSlide {
   title: string;
@@ -44,7 +45,7 @@ export default function TourScreen() {
   if (isDesktop) {
     const cardWidth = width * 0.5 - 32; // 50% of screen width minus padding
     return (
-      <XStack flex={1} padding="$4" backgroundColor="$background">
+      <XStack flex={1} padding="4" backgroundColor="$background">
         {/* Left Card with Carousel */}
         <Card
           width="50%"

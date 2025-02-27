@@ -1,12 +1,5 @@
-import {
-  StyleSheet,
-  View,
-  Text,
-  ScrollView,
-  Image,
-  Platform,
-  TouchableOpacity,
-} from 'react-native';
+import { Text } from '@acme/ui';
+import { StyleSheet, View, ScrollView, Image, Platform, TouchableOpacity } from 'react-native';
 
 export default function HomeScreen() {
   return (
