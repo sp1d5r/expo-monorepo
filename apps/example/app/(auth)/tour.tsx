@@ -1,8 +1,8 @@
-import { Text, Button } from '@acme/ui';
+// import { Text, Button } from '@acme/ui';
 import { useRouter } from 'expo-router';
 import { Image, StyleSheet, useWindowDimensions } from 'react-native';
 import Carousel from 'react-native-reanimated-carousel';
-import { Card, H1, XStack, YStack } from 'tamagui';
+import { Card, H1, XStack, YStack, Text, Button } from 'tamagui';
 
 interface TourSlide {
   title: string;
