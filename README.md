@@ -15,6 +15,77 @@
   <a href="https://github.com/byCedric/expo-monorepo-example#%EF%B8%8F-caveats"><b>Caveats & Issues</b></a>
 </p>
 
+```bash
+.
+├── LICENSE.md
+├── README.md
+├── apps
+│   └── example
+      ├── app
+      │   ├── (auth)
+      │   ├── (tabs)
+      │   ├── +not-found.tsx
+      │   ├── _layout.tsx
+      │   └── index.tsx
+      ├── app.json
+      ├── assets
+      │   ├── fonts
+      │   └── images
+      ├── components
+      │   ├── __tests__
+      │   └── auth
+      ├── constants
+      │   ├── Colors.ts
+      │   └── FirebaseConfig.ts
+      ├── contexts
+      │   └── AuthContext.tsx
+      ├── eas.json
+      ├── expo-env.d.ts
+      ├── hooks
+      │   ├── useColorScheme.ts
+      │   ├── useColorScheme.web.ts
+      │   └── useThemeColor.ts
+      ├── metro.config.js
+      ├── node_modules
+      │   ├── @acme
+      │   ├── @types
+      │   └── typescript
+      ├── package.json
+      ├── services
+      │   ├── authentication
+      │   ├── database
+      │   └── storage
+      ├── tsconfig.json
+      └── types
+          └── User.ts
+├── package.json
+├── packages
+│   ├── eslint-config
+│   └── ui
+      ├── babel.config.js
+      ├── build
+      │   ├── index.d.ts
+      │   ├── index.js
+      │   └── index.js.map
+      ├── node_modules
+      │   ├── @acme
+      │   ├── @babel
+      │   ├── @floating-ui
+      │   ├── @jridgewell
+      │   ├── @tamagui
+      │   └── v4 -> ../@tamagui/config/v4
+      ├── package.json
+      ├── src
+      │   ├── __tests__
+      │   ├── button
+      │   ├── index.ts
+          └── tamagui.config.ts
+└── tsconfig.json
+├── pnpm-lock.yaml
+├── pnpm-workspace.yaml
+└── turbo.json
+```
+
 <br />
 
 ## ⚡ Why is it fast?
