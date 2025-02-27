@@ -1,4 +1,5 @@
-import { StyleSheet, View, Text, ScrollView, Image, Platform } from 'react-native';
+import { Text } from '@acme/ui';
+import { StyleSheet, View, ScrollView, Image, Platform } from 'react-native';
 
 export default function TabTwoScreen() {
   return (
