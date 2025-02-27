@@ -1,6 +1,7 @@
 // import { ChevronLeft } from '@tamagui/lucide-icons';
 import { useState } from 'react';
 import { StyleSheet, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Button, Text, YStack, XStack, Input } from 'tamagui';
 
 type Step = {
@@ -50,6 +51,7 @@ const REGISTRATION_STEPS: Step[] = [
 ];
 
 export function RegisterFlow() {
+  const insets = useSafeAreaInsets();
   const [currentStep, setCurrentStep] = useState(0);
   const [answers, setAnswers] = useState<Record<string, any>>({});
 
@@ -82,7 +84,7 @@ export function RegisterFlow() {
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       style={{ flex: 1 }}
     >
-      <YStack flex={1} bg="$background" p="$4">
+      <YStack flex={1} bg="$background" pt={insets.top} pb="$4" px="$4">
         {/* Header */}
         <XStack width="100%" py="$4">
           {currentStep > 0 ? (
@@ -93,10 +95,11 @@ export function RegisterFlow() {
         </XStack>
 
         {/* Progress Bar */}
-        <XStack width="100%" height={2}>
+        <XStack width="100%" height={2} style={{ backgroundColor: '#e5e5e5' }}>
           <YStack
             height="100%"
             width={`${((currentStep + 1) / REGISTRATION_STEPS.length) * 100}%`}
+            style={{ backgroundColor: '#000' }}
           />
         </XStack>
 
