@@ -1,8 +1,11 @@
 import DateTimePicker from '@react-native-community/datetimepicker';
+import { router } from 'expo-router';
 import { useState } from 'react';
 import { KeyboardAvoidingView, Platform, ScrollView, Image, Dimensions } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Button, Text, YStack, XStack, Input, Stack } from 'tamagui';
+
+import { useAuth } from '@/contexts/AuthContext';
 
 type Option = {
   id: string;
@@ -14,7 +17,7 @@ type Option = {
 type Step = {
   id: string;
   title: string;
-  type: 'date' | 'text' | 'select' | 'multiselect';
+  type: 'date' | 'text' | 'select' | 'multiselect' | 'auth';
   options?: Option[];
   placeholder?: string;
   minDate?: Date;
@@ -89,6 +92,12 @@ const REGISTRATION_STEPS: Step[] = [
       { id: 'female', label: 'Female' },
     ],
   },
+  {
+    id: 'auth',
+    title: 'Create your account',
+    type: 'auth',
+    columns: 1,
+  },
 ];
 
 // Add this helper function to calculate button size based on screen width
@@ -106,6 +115,11 @@ export function RegisterFlow() {
   const [currentStep, setCurrentStep] = useState(0);
   const [answers, setAnswers] = useState<Record<string, any>>({});
   const [showDatePicker, setShowDatePicker] = useState(false);
+  const { register, loginWithGoogle } = useAuth();
+  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [authLoading, setAuthLoading] = useState(false);
 
   const handleBack = () => {
     if (currentStep > 0) {
@@ -113,12 +127,42 @@ export function RegisterFlow() {
     }
   };
 
-  const handleContinue = () => {
+  const handleContinue = async () => {
     if (currentStep < REGISTRATION_STEPS.length - 1) {
       setCurrentStep(currentStep + 1);
     } else {
-      // Handle registration completion
+      // Handle registration completion with Firebase
+      try {
+        setAuthLoading(true);
+        await register(email, answers.name, password);
+
+        // Store additional user data
+        // TODO: Store answers in your backend/Firestore
+        console.log('Registration answers:', answers);
+
+        // Navigate to main app
+        router.replace('/(tabs)');
+      } catch (error) {
+        console.error('Registration failed:', error);
+        // Handle error (show message to user)
+      } finally {
+        setAuthLoading(false);
+      }
+    }
+  };
+
+  const handleGoogleSignIn = async () => {
+    try {
+      setAuthLoading(true);
+      await loginWithGoogle();
+      // TODO: Store answers in your backend/Firestore
       console.log('Registration answers:', answers);
+      router.replace('/(tabs)');
+    } catch (error) {
+      console.error('Google sign in failed:', error);
+      // Handle error
+    } finally {
+      setAuthLoading(false);
     }
   };
 
@@ -310,32 +354,83 @@ export function RegisterFlow() {
                 ))}
               </YStack>
             )}
+
+            {step.type === 'auth' && (
+              <YStack space="$4" flex={1}>
+                <Input
+                  size="$4"
+                  value={email}
+                  onChangeText={setEmail}
+                  placeholder="Email"
+                  autoCapitalize="none"
+                  keyboardType="email-address"
+                />
+                <Input
+                  size="$4"
+                  value={username}
+                  onChangeText={setUsername}
+                  placeholder="username"
+                  autoCapitalize="none"
+                />
+                <Input
+                  size="$4"
+                  value={password}
+                  onChangeText={setPassword}
+                  placeholder="Password"
+                  secureTextEntry
+                />
+                <YStack space="$4" marginTop="$4">
+                  <Button
+                    size="$4"
+                    theme={'black'}
+                    disabled={authLoading || !email || !password}
+                    onPress={handleContinue}
+                  >
+                    {authLoading ? 'Creating Account...' : 'Create Account'}
+                  </Button>
+
+                  <Button
+                    size="$4"
+                    theme={'white'}
+                    outline="$1"
+                    disabled={authLoading}
+                    onPress={handleGoogleSignIn}
+                  >
+                    Continue with Google
+                  </Button>
+                </YStack>
+              </YStack>
+            )}
           </YStack>
         </ScrollView>
 
-        {/* Continue Button */}
-        <Button
-          size="$4"
-          fontSize="$2"
-          bg="black"
-          color="white"
-          borderStartEndRadius="$4"
-          opacity={
-            step.type === 'multiselect'
-              ? (answers[step.id]?.length || 0) > 0
-                ? 1
-                : 0.5
-              : answers[step.id]
-                ? 1
-                : 0.5
-          }
-          disabled={
-            step.type === 'multiselect' ? (answers[step.id]?.length || 0) === 0 : !answers[step.id]
-          }
-          onPress={handleContinue}
-        >
-          {currentStep === REGISTRATION_STEPS.length - 1 ? 'COMPLETE' : 'CONTINUE'}
-        </Button>
+        {/* Continue Button - hide on auth step */}
+        {step.type !== 'auth' && (
+          <Button
+            size="$4"
+            fontSize="$2"
+            bg="black"
+            color="white"
+            borderStartEndRadius="$4"
+            opacity={
+              step.type === 'multiselect'
+                ? (answers[step.id]?.length || 0) > 0
+                  ? 1
+                  : 0.5
+                : answers[step.id]
+                  ? 1
+                  : 0.5
+            }
+            disabled={
+              step.type === 'multiselect'
+                ? (answers[step.id]?.length || 0) === 0
+                : !answers[step.id]
+            }
+            onPress={handleContinue}
+          >
+            CONTINUE
+          </Button>
+        )}
       </YStack>
     </KeyboardAvoidingView>
   );
