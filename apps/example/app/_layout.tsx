@@ -21,6 +21,7 @@ export default function RootLayout() {
   const [loaded] = useFonts({
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
     Playfair: require('../assets/fonts/PlayfairDisplay-VariableFont_wght.ttf'),
+    Inter: require('../assets/fonts/Inter-VariableFont_opsz,wght.ttf'),
   });
 
   useEffect(() => {
