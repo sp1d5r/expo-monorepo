@@ -13,7 +13,7 @@
         ]
       },
       "env": {
-        "EXPO_USE_FAST_RESOLVER": "true",
+        "EXPO_USE_FAST_RESOLVER": "true"
       }
     },
     "development": {
