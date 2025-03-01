@@ -79,6 +79,7 @@
   "dependencies": {
     "@tamagui/babel-plugin": "^1.125.10",
     "@tamagui/config": "^1.125.10",
-    "tamagui": "^1.125.10"
+    "tamagui": "^1.125.10",
+    "@tamagui/lucide-icons": "1.125.10"
   }
 }

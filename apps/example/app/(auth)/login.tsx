@@ -12,7 +12,7 @@ export default function Login() {
   const handleLogin = async () => {
     try {
       await login(email, password);
-      router.replace('/(tabs)');
+      router.replace('/(main)/home');
     } catch (error) {
       console.error('Login failed:', error);
       // You might want to show an error message to the user here
@@ -22,7 +22,7 @@ export default function Login() {
   const handleGoogleLogin = async () => {
     try {
       await loginWithGoogle();
-      router.replace('/(tabs)');
+      router.replace('/(main)/home');
     } catch (error) {
       console.error('Google login failed:', error);
       // You might want to show an error message to the user here
