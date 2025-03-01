@@ -141,7 +141,7 @@ export function RegisterFlow() {
         console.log('Registration answers:', answers);
 
         // Navigate to main app
-        router.replace('/(tabs)');
+        router.replace('/(main)/home');
       } catch (error) {
         console.error('Registration failed:', error);
         // Handle error (show message to user)
@@ -157,7 +157,7 @@ export function RegisterFlow() {
       await loginWithGoogle();
       // TODO: Store answers in your backend/Firestore
       console.log('Registration answers:', answers);
-      router.replace('/(tabs)');
+      router.replace('/(main)/home');
     } catch (error) {
       console.error('Google sign in failed:', error);
       // Handle error

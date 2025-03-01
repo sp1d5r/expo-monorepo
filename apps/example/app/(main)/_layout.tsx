@@ -4,18 +4,18 @@ import { useEffect } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 
 export default function AuthLayout() {
-  const { user } = useAuth();
+  const { loading, user } = useAuth();
 
   useEffect(() => {
-    if (user && user.email) {
-      router.replace('/(main)/home');
+    if (loading && !user) {
+      //   router.replace('/');
     }
   }, [user]);
 
   return (
     <Stack>
       <Stack.Screen
-        name="register"
+        name="home"
         options={{
           headerShown: false,
         }}
