@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "expo-monorepo",
-    "slug": "expo-monorepo",
+    "slug": "nadine",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -15,7 +15,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.sp1d5r.nadine"
     },
     "web": {
       "bundler": "metro",
@@ -24,7 +25,10 @@
     },
     "extra": {
       "eas": {
-        "projectId": "your-project-id"
+        "projectId": "95b0c0f2-0014-4c73-9a89-dcc9aaab1f08"
+      },
+      "router": {
+        "origin": false
       }
     },
     "plugins": [
@@ -41,6 +45,7 @@
     ],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "owner": "sp1d5r"
   }
 }
